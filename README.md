@@ -15,7 +15,7 @@ pip install numpy
 
 ## Usage 
 
-From the directory where FLOWSS.py is saved, it can be run with defaults in a terminal shell:
+From the directory where flowss.py is saved, it can be run with defaults in a terminal shell:
 ```
 python3 flowss.py
 ``` 
