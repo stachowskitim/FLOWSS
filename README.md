@@ -41,7 +41,7 @@ Additionally, by default FLOWSS returns experimental parameters for three differ
 flowss.py -a 100 25 10 1
 ```
 
-A third option specifies the minimum dose needed to achieve enough 'signal to noise' (SND) to sufficiently evaluate whatever characteristic you are interested in with SAXS. This is something that should be determined experimentally. If for instance, with a dose rate of 300 Gy/s and a 0.1 second exposure you determine the resultant scattering intensity is sufficient for your experiment, then your SNR is 30 Gy. Since in a flowing experiment many redundant exposures are collected, (all things being equal) the scattering intensity from each exposure can be summed together to reach this SND value. The SND option can be specified using the -c parameter: 
+A third option specifies the minimum dose needed to achieve enough 'signal to noise' (SND) to sufficiently evaluate whatever characteristic you are interested in with SAXS. This is something that should be determined experimentally. If for instance, with a dose rate of 300 Gy/s and a 0.1 second exposure you determine the resultant scattering intensity is sufficient for your experiment, then your SND is 30 Gy. Since in a flowing experiment many redundant exposures are collected, (all things being equal) the scattering intensity from each exposure can be summed together to reach this SND value. The SND option can be specified using the -c parameter: 
 
 ```
 flowss.py -c 30
