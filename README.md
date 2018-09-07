@@ -2,6 +2,11 @@
 
 Author: Tim Stachowski | email tstachowski@hwi.buffalo.edu
 
+## About FLOWSS
+
+FLOWSS is a program used for calculating the flow rate of a sample that is needed to achieve a certain delievere dose in a SAXS experiment. In the age of third, and now fourth, generation synchrotron sources with high-flux beamlines, radiation damage is one of the most common impedements to collecting useful scattering data from samples in solution. Often to limit radiation damage, a sample volume, much larger than the volume that is actually illuminated at a given time, is oscillated back-and-forth across the beam path so the total dose is distributed across a larger volume. A second approach is to move the sample uni-directionally using an FPLC/HPLC, in this case the flow rate is known and constant. FLOWSS is centered on the relationship that the amount of dose that a sample recieves is proportional to the amount of time it is illuminated by the X-ray beam - or for a flowing sample, how long it takes to traverse the beam path. Once a dose rate is calculated, FLOWSS calculates how fast the sample must flow to achieve a specific delievered dose. Since FPLC/HPLC systems can achieve a wide range of flow rates, FLOWSS is a useful tool for both comparing X-ray damage to biomolecules in solution versus crystalline (high doses) or solution samples to typical conditions seen in X-ray radiation therapy (low doses). 
+
+
 ## Requirements
 FLOWSS requires that Python 3.2, and NumPy and tabulate libraries are installed. Python 3.2 is typically installed by default on Mac OS X. The NumPy and tabulate libraries can be installed through a command line interpreter using a package manager such as PIP:
 ```
