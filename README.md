@@ -3,7 +3,7 @@
 Author: Tim Stachowski | email tstachowski@hwi.buffalo.edu
 
 ## Requirements
-FLOWSS requires that Python 3.2, and NumPy and tabulate libraries are installed. Python 3.2 is typically installed by default on MAC OS X. The NumPy and tabulate libraries can be installed through a command line interpreter using a package manager such as PIP:
+FLOWSS requires that Python 3.2, and NumPy and tabulate libraries are installed. Python 3.2 is typically installed by default on Mac OS X. The NumPy and tabulate libraries can be installed through a command line interpreter using a package manager such as PIP:
 ```
 pip install tabulate
 ```
