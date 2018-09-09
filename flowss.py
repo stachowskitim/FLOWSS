@@ -75,7 +75,7 @@ CLI.add_argument(
     '-b',
     nargs="+",
     type=float,
-    # dose rate for CHESS G1: Acerbo, et al. JSR 2015
+    # Most defaults are from CHESS G1: Acerbo, et al. JSR 2015
     default=[2300]
 )
 
@@ -95,19 +95,36 @@ CLI.add_argument(
     default=[200]
 )
 
+CLI.add_argument(
+    '--beamdimensions',
+    '-e',
+    nargs="+",
+    type=float,
+    default=[.321,.303,1]
+)
+
+CLI.add_argument(
+    '--attenuators',
+    '-f',
+    nargs="+",
+    type=float,
+    default=[.1,.01]
+)
+
 ARGS = CLI.parse_args()
 
 A = np.array(ARGS.sampledoses)
 B = np.array(ARGS.doserate)
 C = np.array(ARGS.snr)
 D = np.array(ARGS.volumelimit)
+E = np.array(ARGS.beamdimensions)
+F = np.array(ARGS.attenuators)
 
 
 
 
 
-
-def dosetable(doselist, doserate, snr, volumelimit):
+def dosetable(doselist, doserate, snr, volumelimit,beamdimensions,attenuators):
 
 
 
@@ -132,10 +149,11 @@ def dosetable(doselist, doserate, snr, volumelimit):
     timevalues = []
     flowratevalues = []
     attenuation = []
+    illuminatedvolume = beamdimensions[0]*beamdimensions[1]*beamdimensions[2]
 
     for sampledose in doselist:
-        flowrate = doserate * 0.125 / sampledose
-        time = (snr * flowrate) / (doserate * .125)
+        flowrate = doserate * illuminatedvolume / sampledose
+        time = (snr * flowrate) / (doserate * illuminatedvolume)
         volume = time * flowrate
         # CHESS G1 has three attenuators, the first two are each one order of magnitude
         attenuator = 0
@@ -143,14 +161,14 @@ def dosetable(doselist, doserate, snr, volumelimit):
         if volume > volumelimit:
 
             attenuator = 1
-            flowrate = (doserate*.1) * 0.125 / sampledose
-            time = (snr * flowrate) / ((doserate*.1) * .125)
+            flowrate = (doserate*.1) * illuminatedvolume / sampledose
+            time = (snr * flowrate) / ((doserate * attenuators[0]) * illuminatedvolume)
             volume = time * flowrate
 
             if volume > volumelimit:
                 attenuator = 2
-                flowrate = (doserate*.01) * 0.125 / sampledose
-                time = (snr * flowrate) / ((doserate*.01) * .125)
+                flowrate = (doserate*.01) * illuminatedvolume / sampledose
+                time = (snr * flowrate) / ((doserate* attenuators[1]) * illuminatedvolume)
                 volume = time * flowrate
                 flowratevalues.append(flowrate)
                 timevalues.append(time)
@@ -193,4 +211,4 @@ def dosetable(doselist, doserate, snr, volumelimit):
 
 
 
-dosetable(A, B, C, D)
+dosetable(A, B, C, D, E, F)
