@@ -124,7 +124,7 @@ F = np.array(ARGS.attenuators)
 
 
 
-def dosetable(doselist, doserate, snr, volumelimit,beamdimensions,attenuators):
+def dosetable(doselist, doserate, snr, volumelimit, beamdimensions, attenuators):
 
 
 
