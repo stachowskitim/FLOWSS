@@ -127,7 +127,7 @@ CLI.add_argument(
     nargs='?',
     required=False,
     default=None,
-    help='input text file with parameter values in alphabetical order of parameter'
+    help='input text file with parameter values in alphabetical order of parameter key with space separated values'
 )
 
 ARGS = CLI.parse_args()
