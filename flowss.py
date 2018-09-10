@@ -60,63 +60,74 @@ from tabulate import tabulate
 
 """
 
-CLI = argparse.ArgumentParser()
+CLI = argparse.ArgumentParser(prog='FLOWSS', usage='%(prog)s [options]',
+                              description='Calculate sample flow rate to '
+                              'deliver specific dose in solution scattering experiments.'
+                              ' More information available at github.com/stachowskitim')
 
 CLI.add_argument(
-    '--sampledoses',
     '-a',
+    '--sampledoses',
     nargs="+",
     type=float,
-    default=[100, 10, 1]
+    default=[100, 10, 1],
+    help='input space separated list of doses for sample'
 )
 
 CLI.add_argument(
-    '--doserate',
     '-b',
+    '--doserate',
     nargs="+",
     type=float,
     # Most defaults are from CHESS G1: Acerbo, et al. JSR 2015
-    default=[2300]
+    default=[2300],
+    help='define dose rate in Gy/s'
 )
 
 CLI.add_argument(
-    '--snr',
     '-c',
+    '--snr',
     nargs="+",
     type=float,
-    default=[100]
+    default=[100],
+    help='define SNR value in Gy'
 )
 
 CLI.add_argument(
-    '--volumelimit',
     '-d',
+    '--volumelimit',
     nargs="+",
     type=float,
-    default=[200]
+    default=[200],
+    help='define volume limit in microliters'
 )
 
 CLI.add_argument(
-    '--beamdimensions',
     '-e',
+    '--beamdimensions',
     nargs="+",
     type=float,
-    default=[.321, .303, 1]
+    default=[.321, .303, 1],
+    help='define beamdimensions x y followed by sample cell internal diameter z '
+    ', all in millimeters'
 )
 
 CLI.add_argument(
-    '--attenuators',
     '-f',
+    '--attenuators',
     nargs="+",
     type=float,
-    default=[.1, .01]
+    default=[.1, .01],
+    help='define up to two attenuator values in fraction flux attenuation (e.g. 10%% = .1)'
 )
 
 CLI.add_argument(
-    '--filename',
     '-g',
+    '--filename',
     nargs='?',
     required=False,
     default=None,
+    help='input text file with parameter values in alphabetical order of parameter'
 )
 
 ARGS = CLI.parse_args()
