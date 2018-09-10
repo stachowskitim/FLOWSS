@@ -59,21 +59,21 @@ The illuminated volume is approximated by a rectangle with dimensions x and y fr
 flowss.py -e .3 .2 1
 ```
 
-Lastly, attenuators offer another dimension to change the sample dose, and is most advantageous to save sample volume. However, this changes the dose rate and therefore might cause a difference in the sample response. Atteunation values (up to two) can be defined in fraction of flux attenuation (e.g. 10% should be input as .1) and is specified with the -f parameter: 
+In addition to flow rate, attenuators offer another dimension used to change the sample dose, and is most advantageous to save sample volume. However, this changes the dose rate and therefore might cause a difference in the sample response. Atteunation values (up to two) can be defined in fraction of flux attenuated (e.g. 10% should be input as 0.1) and is specified with the -f parameter: 
 
 ```
 flows.py -f .1 .1
 ```
 
-Since most likely the user will want to define all of these parameters so that their experimental setup is best defined, a final parameter '-g' can be used to input a plain text file that contains each one of the aforementioned parameter values. Each parameter, in alphabetical order according to the parameter key, should be placed on its own line so that the file should look like:
+Since most likely the user will want to define all of these parameters so that their experimental setup is best defined, a final parameter '-g' can be used *alone* to input a plain text file that contains each one of the aforementioned parameter values. Each parameter, in alphabetical order according to the parameter key, should be placed on its own line with spaces seperated values so that the final input should look like:
 
 ```
-100 99 88 77 55 42 31 22 31 16 5 1 # list of doses for sample
-2300                               # dose rate
-100                                # SND
-200                                # volume limit
-1 0.4 1.0                          # beam dimensions
-.1 .01                             # attenuator values
+100 99 88 77 55 42 31 22 31 16 5 1  # -a, list of doses for sample
+2300                                # -b, dose rate
+100                                 # -c, SND
+200                                 # -d, volume limit
+0.2 0.4 1.0                         # -e, beam dimensions
+0.1 .01                             # -f, attenuator values
 ```
 
 ## Results
