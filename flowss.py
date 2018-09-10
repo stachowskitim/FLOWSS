@@ -100,7 +100,7 @@ CLI.add_argument(
     '-e',
     nargs="+",
     type=float,
-    default=[.321,.303,1]
+    default=[.321, .303, 1]
 )
 
 CLI.add_argument(
@@ -108,7 +108,15 @@ CLI.add_argument(
     '-f',
     nargs="+",
     type=float,
-    default=[.1,.01]
+    default=[.1, .01]
+)
+
+CLI.add_argument(
+    '--filename',
+    '-g',
+    nargs='?',
+    required=False,
+    default=None,
 )
 
 ARGS = CLI.parse_args()
@@ -120,9 +128,19 @@ D = np.array(ARGS.volumelimit)
 E = np.array(ARGS.beamdimensions)
 F = np.array(ARGS.attenuators)
 
+if ARGS.filename is not None:
+    content = []
+    with open(ARGS.filename) as file:
+        for line in file:
+            split = [float(x) for x in line.split(' ')]
+            content.append(split)
 
-
-
+    A = np.array(content[0])
+    B = np.array(content[1])
+    C = np.array(content[2])
+    D = np.array(content[3])
+    E = np.array(content[4])
+    F = np.array(content[5])
 
 def dosetable(doselist, doserate, snr, volumelimit, beamdimensions, attenuators):
 
@@ -204,7 +222,7 @@ def dosetable(doselist, doserate, snr, volumelimit, beamdimensions, attenuators)
 
     print(tabulate(data, cats, tablefmt="grid"))
 
-    print("Equivalent Dose for Desired SNR: " + str(int(snr)) + " Gy")
+    print("Equivalent Dose for Desired SND: " + str(int(snr)) + " Gy")
     print("Volume Limit Per Injection: " + str(int(volumelimit)) + " uL")
     print("Total Sample Volume Required: "+ str(int(sum(volumevalues))) + " uL")
     print("Total Experiment Time: " + str(int(sum(timevalues))) + " seconds")
