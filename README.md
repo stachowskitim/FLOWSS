@@ -47,10 +47,33 @@ A third option specifies the minimum dose needed to achieve enough 'signal to no
 flowss.py -c 30
 ```
 
-The last option regards specifying the volume limit. Currently, FLOWSS only sets an upper limit for volume, which is advantageous for monitoring sample consumption. For example, faster flowing samples that receive lower doses will naturally require more sample volume to reach the required SND value. However, if an attenuator can be used to lower the sample dose instead of adjusting the flow rate, then the sample consumption can minimized - however, this relationship requires that the dose rate is also changed and is done so by FLOWSS. In general, a lower limit for sample volume will be restricted based on the sample delivery system at the beamline including the size of the FLPC loop (if) used and broadening or adhesion effects during sample delivery. An upper volume limit (in microliters) is specified with the -d parameter:
+Currently, FLOWSS only sets an upper limit for volume, which is advantageous for monitoring sample consumption. For example, faster flowing samples that receive lower doses will naturally require more sample volume to reach the required SND value. However, if an attenuator can be used to lower the sample dose instead of adjusting the flow rate, then the sample consumption can minimized - however, this relationship requires that the dose rate is also changed and is done so by FLOWSS. In general, a lower limit for sample volume will be restricted based on the sample delivery system at the beamline including the size of the FLPC loop (if) used and broadening or adhesion effects during sample delivery. An upper volume limit (in microliters) is specified with the -d parameter:
 
 ```
 flowss.py -d 100
+```
+
+The illuminated volume is approximated by a rectangle with dimensions x and y from the beam profile and z form the internal diameter of the capillary (sample cell). This is specified in a space separated list in units of millimeters with the -e parameter:
+
+```
+flowss.py -e .3 .2 1
+```
+
+Lastly, attenuators offer another dimension to change the sample dose, and is most advantageous to save sample volume. However, this changes the dose rate and therefore might cause a difference in the sample response. Atteunation values (up to two) can be defined in fraction of flux attenuation (e.g. 10% should be input as .1) and is specified with the -f parameter: 
+
+```
+flows.py -f .1 .1
+```
+
+Since most likely the user will want to define all of these parameters so that their experimental setup is best defined, a final parameter '-g' can be used to input a plain text file that contains each one of the aforementioned parameter values. Each parameter, in alphabetical order according to the parameter key, should be placed on its own line so that the file should look like:
+
+```
+100 99 88 77 55 42 31 22 31 16 5 1 # list of doses for sample
+2300                               # dose rate
+100                                # SND
+200                                # volume limit
+1 0.4 1.0                          # beam dimensions
+.1 .01                             # attenuator values
 ```
 
 ## Results
@@ -79,7 +102,7 @@ Total Experiment Time: 34 seconds
 In addition to the parameters calculated for each individual experiment, the program also calculates the total combined exposure time and the total volume needed to conduct all experiments in the table. For convienence, the five columns of values are also saved as space separated values to a text file 'dose.txt' in the current working directory, but the formatted table can easily be saved with:
 
 ```
-flowss.py -a 1000 100 50 1 -b 100 -c 1000 -d 100 >> dosetable.txt
+flowss.py -a 100 25 10 1 -b 300 -c 30 -d 100 >> dosetable.txt
 ```
 
 
