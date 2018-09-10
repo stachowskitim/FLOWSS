@@ -65,7 +65,7 @@ In addition to flow rate, attenuators offer another dimension used to change the
 flows.py -f .1 .1
 ```
 
-Since most likely the user will want to define all of these parameters so that their experimental setup is best defined, a final parameter `-g` can be used *alone* to input all the definitions in a plain text file. Each parameter, in alphabetical order according to the parameter key, should be placed on its own line with space seperated values so that the final file should look like (without comments):
+Since most likely the user will want to define all of these parameters so that the dose is most accurately approximated, a final parameter `-g` can be used *alone* to input all the definitions in a plain text file. Each parameter, in alphabetical order according to the parameter key, should be placed on its own line with space seperated values so that the final file should look like (without comments):
 
 ```
 100 99 88 77 55 42 31 22 31 16 5 1  # -a, list of doses for sample
