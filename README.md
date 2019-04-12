@@ -59,7 +59,7 @@ The illuminated volume is approximated by a rectangle with dimensions x and y fr
 flowss.py -e .3 .2 1
 ```
 
-In addition to flow rate, attenuators offer another dimension used to change the sample dose, and is most advantageous to save sample volume. However, this changes the dose rate and therefore might cause a difference in the sample response. Atteunation values (up to two) can be defined in fraction of flux attenuated (e.g. 10% should be input as 0.1) and is specified with the -f parameter: 
+In addition to flow rate, attenuators offer another dimension used to change the sample dose, and is most advantageous to save sample volume. However, this changes the dose rate and therefore might cause a difference in the sample response. Atteunation values (up to two) can be defined in fraction of flux attenuated (e.g. 10% transmission should be input as 0.1) and is specified with the -f parameter: 
 
 ```
 flows.py -f .1 .1
