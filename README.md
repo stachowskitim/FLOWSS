@@ -29,7 +29,7 @@ or
 flowss.py
 ```
 
-In this case, FLOWSS uses a dose rate for the G1 beam line at the Cornell High Energy Synchrotron Source. A custom dose rate can be used (calculated perhaps from RADDOSE-3D (Bury 2018) in Grays/second (Gy/s)) by specifying the -b parameter:
+In this case, FLOWSS uses a dose rate for the G1 beam line at the Cornell High Energy Synchrotron Source. A custom dose rate can be used (calculated perhaps from RADDOSE-3D (Bury et al., 2018) in Grays/second (Gy/s)) by specifying the -b parameter:
 
 ```
 flowss.py -b 300
