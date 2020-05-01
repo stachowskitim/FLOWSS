@@ -114,16 +114,6 @@ CLI.add_argument(
 
 CLI.add_argument(
     '-f',
-    '--illuminatedvolume',
-    nargs="+",
-    type=float,
-    default=[.321, .303, 1],
-    help='define beam or sample container dimensions x y z, whichever is smaller'
-    ', all in millimeters'
-)
-
-CLI.add_argument(
-    '-g',
     '--attenuators',
     nargs="+",
     type=float,
@@ -147,8 +137,7 @@ B = np.array(ARGS.doserate)
 C = np.array(ARGS.snr)
 D = np.array(ARGS.volumelimit)
 E = np.array(ARGS.beamdimensions)
-F = np.array(ARGS.illuminatedvolume)
-G = np.array(ARGS.attenuators)
+F = np.array(ARGS.attenuators)
 
 if ARGS.filename is not None:
     content = []
@@ -163,9 +152,8 @@ if ARGS.filename is not None:
     D = np.array(content[3])
     E = np.array(content[4])
     F = np.array(content[5])
-    G = np.array(content[5])
 
-def dosetable(doselist, doserate, snr, volumelimit, illuminatedvolume, beamdimensions, attenuators):
+def dosetable(doselist, doserate, snr, volumelimit, beamdimensions, attenuators):
 
 
 
@@ -190,11 +178,11 @@ def dosetable(doselist, doserate, snr, volumelimit, illuminatedvolume, beamdimen
     timevalues = []
     flowratevalues = []
     attenuation = []
-    volumefactor = (illuminatedvolume[0]*illuminatedvolume[1]*illuminatedvolume[2])/(beamdimensions[0]*beamdimensions[1]*beamdimensions[2])
+    illuminatedvolume = (beamdimensions[0]*beamdimensions[1]*beamdimensions[2])
 
     for sampledose in doselist:
-        flowrate = doserate * volumefactor / sampledose
-        time = (snr * flowrate) / (doserate * volumefactor)
+        flowrate = doserate * illuminatedvolume / sampledose
+        time = (snr * flowrate) / (doserate * illuminatedvolume)
         volume = time * flowrate
         # CHESS G1 has three attenuators, the first two are each one order of magnitude
         attenuator = 0
@@ -202,14 +190,14 @@ def dosetable(doselist, doserate, snr, volumelimit, illuminatedvolume, beamdimen
         if volume > volumelimit:
 
             attenuator = 1
-            flowrate = (doserate*.1) * volumefactor / sampledose
-            time = (snr * flowrate) / ((doserate * attenuators[0]) * volumefactor)
+            flowrate = (doserate*.1) * illuminatedvolume / sampledose
+            time = (snr * flowrate) / ((doserate * attenuators[0]) * illuminatedvolume)
             volume = time * flowrate
 
             if volume > volumelimit:
                 attenuator = 2
-                flowrate = (doserate*.01) * volumefactor / sampledose
-                time = (snr * flowrate) / ((doserate* attenuators[1]) * volumefactor)
+                flowrate = (doserate*.01) * illuminatedvolume / sampledose
+                time = (snr * flowrate) / ((doserate* attenuators[1]) * illuminatedvolume)
                 volume = time * flowrate
                 flowratevalues.append(flowrate)
                 timevalues.append(time)
@@ -251,4 +239,4 @@ def dosetable(doselist, doserate, snr, volumelimit, illuminatedvolume, beamdimen
     print("Total Experiment Time: " + str(int(sum(timevalues))) + " seconds")
 
 
-dosetable(A, B, C, D, E, F, G)
+dosetable(A, B, C, D, E, F)
