@@ -53,10 +53,11 @@ Currently, FLOWSS only sets an upper limit for volume, which is advantageous for
 flowss.py -d 100
 ```
 
-The illuminated volume is approximated by a retangular prism with dimensions x and y from the beam profile or sample container (whichever is smaller) and z from the internal diameter of the sample cell. This is specified in a space separated list in units of millimeters with the -e parameter:
+The illuminated volume is approximated by a retangular prism with dimensions x and y from the beam profile or sample container (whichever is smaller) and z from the internal diameter of the sample cell. Depending on the focus of the beam and the sample container, the illuminated volume can be much smaller than the beam profile. In this case, only a portion of the total dose is delivered to the sample. Beam and illuminated volume dimensions are specified in a space separated list in units of millimeters with -e and -f parameters, respectively:
 
 ```
 flowss.py -e .3 .2 1
+flowss.py -f .3 .2 1
 ```
 
 In addition to flow rate, attenuators offer another dimension used to change the sample dose, and is most advantageous to save sample volume. However, this changes the dose rate and therefore might cause a difference in the sample response. Atteunation values (up to two) can be defined in fraction of flux attenuated (e.g. 10% transmission should be input as 0.1) and is specified with the -f parameter: 
@@ -72,14 +73,15 @@ Since most likely the user will want to define all of these parameters so that t
 2300                                # -b, dose rate
 100                                 # -c, SND
 200                                 # -d, volume limit
-0.2 0.4 1.0                         # -e, illuminated volume dimensions
-0.1 .01                             # -f, attenuator values
+0.2 0.4 1.0                         # -e, beam
+0.2 0.4 1.0                         # -f, illuminated volume dimensions
+0.1 .01                             # -g, attenuator values
 ```
 
 and the input:
 
 ```
-flowss.py -g input.txt
+flowss.py -i input.txt
 ```
 
 ## Results
