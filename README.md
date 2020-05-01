@@ -53,7 +53,7 @@ Currently, FLOWSS only sets an upper limit for volume, which is advantageous for
 flowss.py -d 100
 ```
 
-The illuminated volume is approximated by a rectangle with dimensions x and y from the beam profile and z from the internal diameter of the capillary (sample cell). This is specified in a space separated list in units of millimeters with the -e parameter:
+The illuminated volume is approximated by a retangular prism with dimensions x and y from the beam profile or sample container (whichever is smaller) and z from the internal diameter of the sample cell. This is specified in a space separated list in units of millimeters with the -e parameter:
 
 ```
 flowss.py -e .3 .2 1
