@@ -104,11 +104,11 @@ CLI.add_argument(
 
 CLI.add_argument(
     '-e',
-    '--beamdimensions',
+    '--exposeddimensions',
     nargs="+",
     type=float,
     default=[.321, .303, 1],
-    help='define beamdimensions x y followed by sample cell internal diameter z '
+    help='define x y z dimensions of the sample container or the beam size, whichever is smaller'
     ', all in millimeters'
 )
 
@@ -136,7 +136,7 @@ A = np.array(ARGS.sampledoses)
 B = np.array(ARGS.doserate)
 C = np.array(ARGS.snr)
 D = np.array(ARGS.volumelimit)
-E = np.array(ARGS.beamdimensions)
+E = np.array(ARGS.exposeddimensions)
 F = np.array(ARGS.attenuators)
 
 if ARGS.filename is not None:
@@ -178,7 +178,7 @@ def dosetable(doselist, doserate, snr, volumelimit, beamdimensions, attenuators)
     timevalues = []
     flowratevalues = []
     attenuation = []
-    illuminatedvolume = beamdimensions[0]*beamdimensions[1]*beamdimensions[2]
+    illuminatedvolume = exposeddimensions[0]*exposeddimensions[1]*exposeddimensions[2]
 
     for sampledose in doselist:
         flowrate = doserate * illuminatedvolume / sampledose
