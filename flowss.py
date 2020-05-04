@@ -190,13 +190,13 @@ def dosetable(doselist, doserate, snr, volumelimit, beamdimensions, attenuators)
         if volume > volumelimit:
 
             attenuator = 1
-            flowrate = (doserate*.1) * illuminatedvolume / sampledose
+            flowrate = (doserate*attenuators[0]) * illuminatedvolume / sampledose
             time = (snr * flowrate) / ((doserate * attenuators[0]) * illuminatedvolume)
             volume = time * flowrate
 
             if volume > volumelimit:
                 attenuator = 2
-                flowrate = (doserate*.01) * illuminatedvolume / sampledose
+                flowrate = (doserate*attenuators[1]) * illuminatedvolume / sampledose
                 time = (snr * flowrate) / ((doserate* attenuators[1]) * illuminatedvolume)
                 volume = time * flowrate
                 flowratevalues.append(flowrate)
